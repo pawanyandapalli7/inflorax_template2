@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="theme-color" content="#f7f6f2"/>
+<title>Free Creator Audit — Inflorax®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ══ TOKENS — exact match to main site ══ */
+:root{
+  --bg:#f7f6f2;--white:#fff;--ink:#0a0a0a;
+  --ink60:rgba(10,10,10,.6);--ink30:rgba(10,10,10,.3);--ink10:rgba(10,10,10,.1);
+  --blue:#0050f0;--blue-d:#0040c0;
+  --blue-l:rgba(0,80,240,.08);--blue-m:rgba(0,80,240,.16);
+  --line:rgba(10,10,10,.1);--line2:rgba(10,10,10,.06);
+  --nav-h:64px;
+  --sans:'Inter',sans-serif;--mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .18s,height .18s;display:none}
+@media(hover:hover) and (pointer:fine){#cur,#cur-ring{display:block}}
+#cur-ring{position:fixed;width:28px;height:28px;border:1.5px solid rgba(10,10,10,.2);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.16,1,.3,1),height .3s}
+body:has(button:hover) #cur{width:4px;height:4px}
+body:has(button:hover) #cur-ring{width:40px;height:40px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;padding:0 28px;
+  background:rgba(247,246,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
+}
+.logo{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.04em;cursor:pointer;display:flex;align-items:center;gap:1px;text-decoration:none}
+.logo-h{color:var(--blue);font-family:Arial,sans-serif}
+.nav-tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink30)}
+.btn-nav-back{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60);background:none;border:1.5px solid var(--line);padding:7px 16px;border-radius:100px;cursor:pointer;transition:all .2s;touch-action:manipulation}
+.btn-nav-back:hover{border-color:var(--ink30);color:var(--ink)}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+
+/* ── PAGE ── */
+.page{min-height:100svh;padding-top:var(--nav-h);display:grid;grid-template-columns:360px 1fr}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  background:var(--ink);position:sticky;top:var(--nav-h);
+  height:calc(100svh - var(--nav-h));
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:48px 40px;overflow:hidden;
+}
+.sb-bg{
+  position:absolute;bottom:-0.1em;left:-0.04em;
+  font-size:clamp(120px,16vw,200px);font-weight:900;
+  color:rgba(255,255,255,.03);letter-spacing:-.06em;
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+}
+.sb-top{position:relative;z-index:1}
+.sb-brand{font-size:18px;font-weight:900;color:var(--white);letter-spacing:-.04em;margin-bottom:5px;display:flex;align-items:center;gap:2px}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);margin-left:2px;animation:sdot 2.5s ease-in-out infinite}
+@keyframes sdot{0%,100%{transform:scale(1)}50%{transform:scale(1.5);opacity:.6}}
+.sb-sub{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.sb-mid{position:relative;z-index:1}
+.sb-h{font-size:clamp(26px,2.8vw,38px);font-weight:900;color:var(--white);letter-spacing:-.04em;line-height:1.06;margin-bottom:14px}
+.sb-h em{font-style:normal;color:rgba(100,150,255,.85)}
+.sb-p{font-size:14px;line-height:1.75;color:rgba(255,255,255,.42);max-width:290px}
+.perks{margin-top:24px;display:flex;flex-direction:column;gap:8px}
+.perk{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:13px;color:rgba(255,255,255,.5);line-height:1.4}
+.perk-ico{width:26px;height:26px;background:rgba(0,80,240,.2);border:1px solid rgba(0,80,240,.3);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.sb-bottom{position:relative;z-index:1}
+.sb-trust{display:flex;flex-direction:column;gap:7px}
+.sb-ti{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.22);display:flex;align-items:center;gap:7px}
+.sb-ti::before{content:'✓';color:rgba(0,80,240,.6);font-size:10px;font-weight:700}
+
+/* ── FORM PANEL ── */
+.form-panel{background:var(--white);display:flex;flex-direction:column;min-height:calc(100svh - var(--nav-h));position:relative}
+
+/* progress */
+.prog-wrap{padding:32px 52px 24px;flex-shrink:0;border-bottom:1px solid var(--line2)}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prog-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink30)}
+.prog-pct{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--blue)}
+.prog-track{height:2px;background:var(--line2);overflow:hidden}
+.prog-fill{height:100%;background:var(--blue);width:0%;transition:width .5s cubic-bezier(.16,1,.3,1)}
+.seg-row{display:flex;gap:3px;margin-top:8px}
+.seg{height:3px;flex:1;background:var(--line2);transition:background .3s}
+.seg.done{background:var(--blue)}
+.seg.cur{background:var(--blue);opacity:.45}
+
+/* q area */
+.q-area{flex:1;display:flex;flex-direction:column;justify-content:center;padding:36px 52px;position:relative;overflow:hidden;min-height:400px}
+.q-card{
+  position:absolute;inset:36px 52px;
+  display:flex;flex-direction:column;justify-content:center;
+  opacity:0;pointer-events:none;
+  transform:translateX(44px);
+  transition:opacity .36s cubic-bezier(.16,1,.3,1),transform .36s cubic-bezier(.16,1,.3,1);
+  overflow-y:auto;
+}
+.q-card.active{opacity:1;pointer-events:all;transform:translateX(0);position:relative;inset:auto;overflow-y:visible}
+.q-card.exit{opacity:0;transform:translateX(-44px);pointer-events:none}
+.q-ey{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink30);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.q-ey::before{content:'';width:14px;height:1px;background:var(--line)}
+.q-ey .opt{color:var(--blue);margin-left:4px}
+.q-t{font-size:clamp(20px,2.6vw,28px);font-weight:900;color:var(--ink);letter-spacing:-.04em;line-height:1.1;margin-bottom:8px}
+.q-hint{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--ink30);margin-bottom:22px;line-height:1.55;font-style:italic}
+
+/* choices */
+.choices{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.ch{
+  display:flex;align-items:center;gap:14px;padding:12px 16px;
+  border:1.5px solid var(--line);background:var(--bg);cursor:pointer;
+  transition:border-color .18s,background .18s,transform .15s;
+  user-select:none;-webkit-user-select:none;touch-action:manipulation;
+}
+.ch:hover{border-color:var(--blue);background:var(--blue-l);transform:translateX(4px)}
+.ch.on{border-color:var(--blue);background:var(--blue-l)}
+.ch-radio{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:border-color .18s,background .18s}
+.ch.on .ch-radio{border-color:var(--blue);background:var(--blue)}
+.ch.on .ch-radio::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--white)}
+.ch-lbl{font-size:14px;font-weight:500;color:var(--ink);flex:1;line-height:1.4}
+.ch.on .ch-lbl{color:var(--blue)}
+
+/* text inputs */
+.ti{width:100%;padding:13px 16px;border:1.5px solid var(--line);background:var(--bg);font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;transition:border-color .2s,background .2s;resize:none;-webkit-appearance:none;appearance:none}
+.ti:focus{border-color:var(--blue);background:var(--white)}
+.ti::placeholder{color:var(--ink30)}
+
+/* contact block */
+.contact-stack{display:flex;flex-direction:column;gap:0;border:1.5px solid var(--line);margin-bottom:20px}
+.contact-stack .ti{border:none;border-bottom:1px solid var(--line)}
+.contact-stack .ti:last-child{border-bottom:none}
+.contact-stack .ti:focus{border-color:transparent;border-bottom-color:var(--blue);background:var(--white);position:relative;z-index:1}
+
+/* optional upload */
+.opt-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.opt-pill{background:var(--blue-l);border:1px solid var(--blue-m);padding:2px 9px;border-radius:100px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.up-zone{border:2px dashed var(--line);padding:24px;text-align:center;cursor:pointer;position:relative;transition:border-color .2s,background .2s}
+.up-zone:hover{border-color:var(--blue);background:var(--blue-l)}
+.up-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.up-ico{font-size:22px;margin-bottom:7px}
+.up-t{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;letter-spacing:-.01em}
+.up-h{font-family:var(--mono);font-size:11px;color:var(--ink30);letter-spacing:.03em}
+.up-name{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:8px;display:none}
+
+/* nav bar */
+.q-nav{padding:18px 52px 28px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line2);flex-shrink:0;gap:10px}
+.q-rem{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink30);white-space:nowrap}
+.nav-r{display:flex;gap:8px;align-items:center}
+.btn-back2{background:none;border:1.5px solid var(--line);padding:10px 20px;border-radius:100px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink60);cursor:pointer;transition:all .2s;letter-spacing:-.01em;touch-action:manipulation}
+.btn-back2:hover{border-color:var(--ink30);color:var(--ink)}
+.btn-skip2{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink30);background:none;border:none;cursor:pointer;transition:color .2s;padding:6px;touch-action:manipulation}
+.btn-skip2:hover{color:var(--ink)}
+.btn-next2{background:var(--ink);color:var(--white);border:none;padding:12px 26px;border-radius:100px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;letter-spacing:-.01em;display:flex;align-items:center;gap:7px;position:relative;overflow:hidden;white-space:nowrap;touch-action:manipulation}
+.btn-next2:hover{background:var(--blue);transform:translateY(-1px)}
+.btn-next2:disabled{background:var(--ink10);color:var(--ink30);cursor:not-allowed;transform:none}
+
+/* thank you */
+.ty{position:absolute;inset:0;background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 52px;text-align:center;z-index:20;opacity:0;pointer-events:none;transform:translateY(20px);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1)}
+.ty.show{opacity:1;pointer-events:all;transform:none}
+.ty-ck{width:66px;height:66px;border-radius:50%;background:var(--blue-l);border:2px solid var(--blue-m);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px;animation:ckpop .55s cubic-bezier(.16,1,.3,1) .2s both}
+@keyframes ckpop{from{transform:scale(0)}to{transform:scale(1)}}
+.ty-h{font-size:clamp(24px,3vw,36px);font-weight:900;color:var(--ink);letter-spacing:-.05em;margin-bottom:10px}
+.ty-p{font-size:15px;color:var(--ink60);line-height:1.7;max-width:360px;margin:0 auto 28px}
+.ty-list{background:var(--bg);border:1px solid var(--line);padding:0;max-width:340px;width:100%;margin-bottom:28px;text-align:left}
+.ty-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink60);padding:12px 18px;border-bottom:1px solid var(--line2)}
+.ty-row:last-child{border:none}
+.ty-row::before{content:'✓';color:var(--blue);font-weight:700;font-size:11px;flex-shrink:0}
+.btn-ty-home{background:var(--ink);color:var(--white);border:none;padding:13px 28px;border-radius:100px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:background .2s;letter-spacing:-.01em;touch-action:manipulation}
+.btn-ty-home:hover{background:var(--blue)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .page{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;padding:24px 28px;flex-direction:row;align-items:center;justify-content:space-between}
+  .sb-mid,.perks,.sb-bottom{display:none}
+  .sb-bg{font-size:80px}
+}
+@media(max-width:768px){
+  :root{--nav-h:56px}
+  #cur,#cur-ring{display:none}
+  *{cursor:auto!important}
+  nav{padding:0 16px}
+  .nav-tag{display:none}
+  .prog-wrap{padding:24px 20px 18px}
+  .q-area{padding:24px 20px;min-height:auto}
+  .q-card{inset:0}
+  .q-card.active{padding:24px 20px 0}
+  .q-nav{padding:16px 20px 24px}
+  .ty{padding:32px 20px}
+}
+@media(max-width:480px){
+  .sidebar{padding:18px 16px}
+  .q-t{font-size:20px}
+  .q-area{padding:20px 16px}
+  .q-card.active{padding:20px 16px 0}
+  .q-nav{flex-wrap:wrap;padding:14px 16px 22px}
+  .q-rem{width:100%;order:-1}
+  .nav-r{width:100%;justify-content:space-between}
+  .btn-next2{flex:1;justify-content:center}
+  .prog-wrap{padding:20px 16px 16px}
+  .ch{padding:11px 14px}
+  .ti{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" onclick="goHome()">INFLORAX<span class="logo-h">♥</span></a>
+  <span class="nav-tag">Free Creator Audit</span>
+  <button class="btn-nav-back" onclick="goHome()">← Back to site</button>
+</nav>
+
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-bg" aria-hidden="true">Audit</div>
+    <div class="sb-top">
+      <div class="sb-brand">INFLORAX<span class="sb-dot"></span></div>
+      <div class="sb-sub">Free Creator Audit</div>
+    </div>
+    <div class="sb-mid">
+      <h2 class="sb-h">Let's find your<br>growth <em>opportunity.</em></h2>
+      <p class="sb-p">A few quick questions about your content and we'll send you a personalized breakdown — free, within 48 hours.</p>
+      <div class="perks">
+        <div class="perk"><div class="perk-ico">📊</div>Personalized profile breakdown</div>
+        <div class="perk"><div class="perk-ico">🎯</div>Your single biggest opportunity</div>
+        <div class="perk"><div class="perk-ico">⚡</div>Delivered within 48 hours</div>
+        <div class="perk"><div class="perk-ico">🔒</div>No password or login required</div>
+      </div>
+    </div>
+    <div class="sb-bottom">
+      <div class="sb-trust">
+        <div class="sb-ti">No purchase required</div>
+        <div class="sb-ti">No passwords ever asked</div>
+        <div class="sb-ti">48h turnaround guaranteed</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- FORM -->
+  <main class="form-panel">
+
+    <!-- PROGRESS -->
+    <div class="prog-wrap">
+      <div class="prog-top">
+        <span class="prog-lbl">Question <span id="qidx">1</span> of <span id="qtot">10</span></span>
+        <span class="prog-pct" id="qpct">0%</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="pfill"></div></div>
+      <div class="seg-row" id="segs"></div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div class="q-area" id="qarea">
+
+      <div class="q-card active" data-q="1" data-type="choice" data-key="content_type">
+        <div class="q-ey">01 of 10 — Content type</div>
+        <div class="q-t">What type of content do you primarily post?</div>
+        <div class="choices">
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Reels / Shorts</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Talking videos</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Lifestyle / Daily content</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Fashion / Beauty</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Educational / Informational</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Other</div></div>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="2" data-type="text" data-key="niche">
+        <div class="q-ey">02 of 10 — Your niche</div>
+        <div class="q-t">What is your niche or category?</div>
+        <div class="q-hint">E.g. fitness, personal finance, travel, cooking, comedy…</div>
+        <textarea class="ti" rows="3" placeholder="Describe your content niche…" oninput="onText(this)"></textarea>
+      </div>
+
+      <div class="q-card" data-q="3" data-type="choice" data-key="post_frequency">
+        <div class="q-ey">03 of 10 — Posting frequency</div>
+        <div class="q-t">How often do you post content?</div>
+        <div class="choices">
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Daily</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">3–5 times a week</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">1–2 times a week</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Rarely</div></div>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="4" data-type="choice" data-key="main_goal">
+        <div class="q-ey">04 of 10 — Your goal</div>
+        <div class="q-t">What is your main goal right now?</div>
+        <div class="choices">
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Increase followers / subscribers</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Get more views / reach</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Improve engagement</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Build personal brand</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Become an influencer</div></div>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="5" data-type="text" data-key="best_post">
+        <div class="q-ey">05 of 10 — Past wins <span class="opt">(Optional)</span></div>
+        <div class="q-t">Have you ever had a post or video perform well?</div>
+        <div class="q-hint">What kind of content worked best for you? What made it different?</div>
+        <textarea class="ti" rows="4" placeholder="Tell us about your best performing content…" oninput="onText(this)"></textarea>
+      </div>
+
+      <div class="q-card" data-q="6" data-type="choice" data-key="post_time">
+        <div class="q-ey">06 of 10 — Posting time</div>
+        <div class="q-t">When do you usually post?</div>
+        <div class="choices">
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Morning</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Afternoon</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Evening</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Night</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">No fixed timing</div></div>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="7" data-type="choice" data-key="content_plan">
+        <div class="q-ey">07 of 10 — Content planning</div>
+        <div class="q-t">Do you currently follow a content plan?</div>
+        <div class="choices">
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Yes — I plan ahead</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">Sometimes</div></div>
+          <div class="ch" onclick="pick(this)"><div class="ch-radio"></div><div class="ch-lbl">No — I post spontaneously</div></div>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="8" data-type="text" data-key="challenge">
+        <div class="q-ey">08 of 10 — Your challenge <span class="opt">(Optional)</span></div>
+        <div class="q-t">What is your biggest challenge right now?</div>
+        <div class="q-hint">Be honest — this gives us the most insight to help you effectively.</div>
+        <textarea class="ti" rows="4" placeholder="e.g. My reach dropped, I don't know what to post, I'm not getting engagement…" oninput="onText(this)"></textarea>
+      </div>
+
+      <div class="q-card" data-q="9" data-type="text" data-key="target_audience">
+        <div class="q-ey">09 of 10 — Your audience <span class="opt">(Optional)</span></div>
+        <div class="q-t">Who is your target audience?</div>
+        <div class="q-hint">E.g. students, fitness enthusiasts, fashion lovers, entrepreneurs…</div>
+        <textarea class="ti" rows="3" placeholder="Describe your ideal viewer or follower…" oninput="onText(this)"></textarea>
+      </div>
+
+      <div class="q-card" data-q="10" data-type="contact" data-key="contact">
+        <div class="q-ey">10 of 10 — Send your audit</div>
+        <div class="q-t">Where should we send your audit?</div>
+        <div class="contact-stack">
+          <input class="ti" type="text" id="cn" placeholder="Your name" autocomplete="name" oninput="onContact()"/>
+          <input class="ti" type="email" id="ce" placeholder="you@email.com" autocomplete="email" oninput="onContact()"/>
+          <input class="ti" type="text" id="ch2" placeholder="@handle or profile URL" oninput="onContact()"/>
+          <select class="ti" id="cp" onchange="onContact()" style="-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22%3E%3Cpath d=%22M0 0l5 6 5-6z%22 fill=%22rgba(10,10,10,0.3)%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer">
+            <option value="">Select platform</option>
+            <option value="ig">Instagram</option>
+            <option value="yt">YouTube</option>
+            <option value="both">Both platforms</option>
+          </select>
+        </div>
+        <div class="opt-lbl">Optional insights <span class="opt-pill">Optional</span></div>
+        <div class="up-zone">
+          <input type="file" id="fup" accept="image/*,.pdf" multiple onchange="onUpload(this)"/>
+          <div class="up-ico">📸</div>
+          <div class="up-t">Upload analytics screenshots</div>
+          <div class="up-h">Reach, audience activity, or insights — optional but helpful</div>
+          <div class="up-name" id="upname"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NAV -->
+    <div class="q-nav">
+      <span class="q-rem" id="qrem">9 questions remaining</span>
+      <div class="nav-r">
+        <button class="btn-skip2" id="bskip" onclick="skipQ()" style="display:none">Skip</button>
+        <button class="btn-back2" id="bback" onclick="prevQ()" style="display:none">← Back</button>
+        <button class="btn-next2" id="bnext" onclick="nextQ()" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- THANK YOU -->
+    <div class="ty" id="ty">
+      <div class="ty-ck">✓</div>
+      <div class="ty-h">You're on the list.</div>
+      <p class="ty-p">We'll review your profile and send your personalized audit within 48 hours. No pitch, no pressure — just real, actionable feedback.</p>
+      <div class="ty-list">
+        <div class="ty-row">Delivered to your email within 48 hours</div>
+        <div class="ty-row">Personalized based on your answers</div>
+        <div class="ty-row">No purchase required — ever</div>
+        <div class="ty-row">No passwords or login access asked</div>
+      </div>
+      <button class="btn-ty-home" onclick="goHome()">← Back to Inflorax</button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* cursor */
+(function(){
+  var c=document.getElementById('cur'),r=document.getElementById('cur-ring');
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches){c.style.display='none';r.style.display='none';return;}
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';},{passive:true});
+  (function lp(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(lp);})();
+})();
+
+/* state */
+var TOTAL=10,cur=1,answers={};
+var OPT={5:true,8:true,9:true};
+
+function qcard(n){return document.querySelector('.q-card[data-q="'+n+'"]');}
+
+/* build segs */
+(function(){
+  var w=document.getElementById('segs');
+  document.getElementById('qtot').textContent=TOTAL;
+  for(var i=1;i<=TOTAL;i++){var d=document.createElement('div');d.className='seg';d.id='s'+i;w.appendChild(d);}
+})();
+
+function ui(){
+  var done=cur-1,pct=Math.round(done/TOTAL*100);
+  document.getElementById('pfill').style.width=pct+'%';
+  document.getElementById('qpct').textContent=pct+'%';
+  document.getElementById('qidx').textContent=cur;
+  var rem=TOTAL-cur;
+  document.getElementById('qrem').textContent=cur===TOTAL?'Last question!':(rem+' question'+(rem===1?'':'s')+' remaining');
+  for(var i=1;i<=TOTAL;i++){var d=document.getElementById('s'+i);if(d)d.className='seg'+(i<cur?' done':(i===cur?' cur':''));}
+  document.getElementById('bback').style.display=cur>1?'':'none';
+  document.getElementById('bskip').style.display=OPT[cur]?'inline-block':'none';
+  document.getElementById('bnext').innerHTML=cur===TOTAL?'Submit ✓':'Continue →';
+  chkNext();
+}
+
+function chkNext(){document.getElementById('bnext').disabled=!canGo();}
+
+function canGo(){
+  var c=qcard(cur);if(!c)return false;
+  var t=c.dataset.type;
+  if(OPT[cur])return true;
+  if(t==='choice')return!!c.querySelector('.ch.on');
+  if(t==='text'){var ta=c.querySelector('textarea');return ta&&ta.value.trim().length>0;}
+  if(t==='contact'){
+    return!!(document.getElementById('cn').value.trim()&&document.getElementById('ce').value.trim()&&document.getElementById('ch2').value.trim()&&document.getElementById('cp').value);
+  }
+  return true;
+}
+
+function pick(el){
+  el.closest('.choices').querySelectorAll('.ch').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');
+  answers[el.closest('.q-card').dataset.key]=el.querySelector('.ch-lbl').textContent;
+  chkNext();
+  setTimeout(function(){if(canGo())nextQ();},300);
+}
+function onText(el){answers[el.closest('.q-card').dataset.key]=el.value.trim();chkNext();}
+function onContact(){
+  answers.name=document.getElementById('cn').value.trim();
+  answers.email=document.getElementById('ce').value.trim();
+  answers.handle=document.getElementById('ch2').value.trim();
+  answers.platform=document.getElementById('cp').value;
+  chkNext();
+}
+function onUpload(inp){
+  if(inp.files&&inp.files.length){
+    var nm=Array.from(inp.files).map(function(f){return f.name;}).join(', ');
+    var el=document.getElementById('upname');el.textContent='📎 '+nm;el.style.display='block';
+    answers.files=nm;
+  }
+}
+
+function transit(from,to,d){
+  from.classList.remove('active');
+  from.style.opacity='0';from.style.transform='translateX('+(d>0?'-44px':'44px')+')';
+  from.style.pointerEvents='none';
+  setTimeout(function(){from.style.cssText='';from.style.display='none';},370);
+  to.style.display='';to.style.opacity='0';to.style.transform='translateX('+(d>0?'44px':'-44px')+')';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){to.classList.add('active');to.style.cssText='';});});
+}
+
+function nextQ(){
+  if(!canGo()&&!OPT[cur])return;
+  if(cur===TOTAL){submit();return;}
+  var f=qcard(cur),t=qcard(cur+1);cur++;transit(f,t,1);ui();
+}
+function prevQ(){
+  if(cur<=1)return;
+  var f=qcard(cur),t=qcard(cur-1);cur--;transit(f,t,-1);ui();
+}
+function skipQ(){
+  if(cur===TOTAL){submit();return;}
+  var f=qcard(cur),t=qcard(cur+1);cur++;transit(f,t,1);ui();
+}
+function submit(){
+  console.log('Audit:',answers);
+  document.getElementById('ty').classList.add('show');
+  document.body.style.overflowY='auto';
+}
+function goHome(){
+  if(window.opener&&!window.opener.closed){window.close();}
+  else if(document.referrer){window.location.href=document.referrer;}
+  else{window.location.href='Inflorax_DDNYC_v3.html';}
+}
+
+/* keyboard */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&!e.shiftKey){
+    var a=document.querySelector('.q-card.active');
+    if(a&&a.dataset.type==='choice')return;
+    if(!document.getElementById('bnext').disabled)nextQ();
+  }
+});
+
+/* ripple */
+(function(){
+  var s=document.createElement('style');s.textContent='@keyframes rpl{to{transform:scale(4);opacity:0}}';document.head.appendChild(s);
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.btn-next2,.btn-back2,.btn-ty-home,.btn-nav-back');if(!b)return;
+    var r=document.createElement('span'),rect=b.getBoundingClientRect(),sz=Math.max(rect.width,rect.height);
+    r.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.22);width:'+sz+'px;height:'+sz+'px;left:'+(e.clientX-rect.left-sz/2)+'px;top:'+(e.clientY-rect.top-sz/2)+'px;transform:scale(0);animation:rpl .5s linear;pointer-events:none;z-index:0';
+    b.style.position='relative';b.style.overflow='hidden';b.appendChild(r);setTimeout(function(){r.remove();},520);
+  });
+})();
+
+ui();
+</script>
+</body>
+</html>
