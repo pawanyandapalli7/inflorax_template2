@@ -56,16 +56,17 @@ nav{
 .nav-time{font-family:var(--mono);font-size:11px;color:var(--ink30);letter-spacing:.04em}
 .nav-contact{background:var(--blue);color:var(--white);border:none;padding:10px 22px;font-size:13px;font-weight:700;font-family:var(--sans);border-radius:100px;cursor:pointer;transition:background .2s,transform .15s;letter-spacing:-.01em}
 .nav-contact:hover{background:var(--blue-d);transform:scale(1.03)}
-.ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .ham span{display:block;width:22px;height:2px;background:var(--ink);transition:all .3s;transform-origin:center;border-radius:1px}
 .ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .ham.open span:nth-child(2){opacity:0}
 .ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.drawer{display:none;position:fixed;inset:0;top:var(--nav-h);z-index:999;background:var(--bg);padding:0;flex-direction:column;border-top:1px solid var(--line)}
+.drawer{display:none;position:fixed;inset:0;top:var(--nav-h);z-index:999;background:var(--bg);padding:0;flex-direction:column;border-top:1px solid var(--line);overflow-y:auto}
 .drawer.open{display:flex}
-.drawer a{padding:20px 28px;font-size:18px;font-weight:700;color:var(--ink);border-bottom:1px solid var(--line);cursor:pointer;text-decoration:none;display:flex;justify-content:space-between;transition:background .2s}
-.drawer a:hover{background:var(--ink06)}
-.drawer-cta{background:var(--blue)!important;color:var(--white)!important;margin:20px 28px;border-radius:12px!important;border:none!important;justify-content:center!important;padding:16px 28px!important}
+.drawer-item{width:100%;padding:22px 24px;font-size:17px;font-weight:700;color:var(--ink);border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;text-decoration:none;display:flex;justify-content:space-between;align-items:center;transition:background .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;font-family:var(--sans);letter-spacing:-.02em;text-align:left}
+.drawer-item span{font-size:18px;color:var(--ink30)}
+.drawer-item:active{background:var(--ink06)}
+.drawer-cta{width:calc(100% - 32px);margin:16px;border-radius:14px!important;background:var(--blue)!important;color:var(--white)!important;border:none;justify-content:center!important;padding:18px 24px!important;font-size:16px!important;font-weight:700!important;font-family:var(--sans)!important;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex!important;align-items:center!important}
 
 /* ══════════════════════════════
    HERO
@@ -252,8 +253,8 @@ nav{
 .btn-o:hover{background:var(--ink);color:var(--white)}
 .btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:rgba(255,255,255,.65);border:1.5px solid rgba(255,255,255,.25);padding:13px 26px;font-size:13px;font-weight:700;font-family:var(--sans);border-radius:100px;cursor:pointer;transition:all .2s;letter-spacing:-.01em;text-decoration:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .btn-ghost:hover{background:var(--white);border-color:var(--white);color:var(--ink)}
-.btn-orange{background:var(--blue)!important;border-color:var(--blue)!important}
-.btn-orange:hover{background:var(--blue-d)!important;border-color:var(--blue-d)!important;color:var(--white)!important}
+.btn-orange,.btn-blue{background:var(--blue)!important;border-color:var(--blue)!important;color:var(--white)!important}
+.btn-orange:hover,.btn-blue:hover{background:var(--blue-d)!important;border-color:var(--blue-d)!important;color:var(--white)!important}
 
 /* reveals */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -701,6 +702,9 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
 .mb-trust{margin-top:14px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .mb-trust span{font-family:var(--mono);font-size:10px;color:var(--ink30);letter-spacing:.04em}
 
+
+/* ── PKG GRID always visible ── */
+.pkg-grid > * { opacity: 1 !important; transform: none !important; }
 /* ══ RESPONSIVE ══ */
 @media(max-width:1024px){
   .sec-header{grid-template-columns:1fr}
@@ -722,7 +726,6 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
 @media(max-width:768px){
   :root{--nav-h:56px}
   #cur,#cur-ring{display:none!important}
-  *{cursor:auto}
   nav{padding:0 16px;height:var(--nav-h)}
   .nav-links,.nav-meta,.nav-contact{display:none}
   .ham{display:flex}
@@ -1217,12 +1220,12 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
   <button class="ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 <div class="drawer" id="drawer">
-  <a onclick="go('process');closeMenu()">How it works <span>→</span></a>
-  <a onclick="go('packages');closeMenu()">Packages <span>→</span></a>
-  <a onclick="go('simulator');closeMenu()">Growth simulator <span>→</span></a>
-  <a onclick="openAudit();closeMenu()">Free audit <span>→</span></a>
-  <a onclick="go('faq');closeMenu()">FAQ <span>→</span></a>
-  <a class="drawer-cta" onclick="go('packages');closeMenu()">Get started →</a>
+  <button class="drawer-item" onclick="go('process')">How it works <span>→</span></button>
+  <button class="drawer-item" onclick="go('packages')">Packages <span>→</span></button>
+  <button class="drawer-item" onclick="go('simulator')">Growth simulator <span>→</span></button>
+  <button class="drawer-item" onclick="closeMenu();setTimeout(openAudit,50)">Free audit <span>→</span></button>
+  <button class="drawer-item" onclick="go('faq')">FAQ <span>→</span></button>
+  <button class="drawer-cta" onclick="go('packages')">Get started →</button>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -1257,7 +1260,7 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
       Strategic content promotion built for early-stage creators who are serious about breaking through low reach.
     </div>
     <div class="hb-cta rv" style="transition-delay:.1s;display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn-d btn-orange" onclick="go('packages')">Choose a package →</button>
+      <button class="btn-d btn-blue" onclick="go('packages')">Choose a package →</button>
       <button class="btn-o" onclick="go('process')">How it works</button>
     </div>
   </div>
@@ -1446,14 +1449,14 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
       </div>
     </div>
 
-    <div id="ig-pkg" class="pkg-grid sg">
+    <div id="ig-pkg" class="pkg-grid" style="display:grid">
       <div class="pkg-c"><div class="pkg-tier">Spark</div><div class="pkg-name">Kickstart</div><div class="pkg-sub">For new creators starting from scratch</div><div class="pkg-pr"><sup>$</sup>79</div><div class="pkg-was">was $129 — launch offer</div><ul class="pkg-feats"><li>Strategic reel promotion push</li><li>Reel visibility campaign</li><li>Engagement signal support</li><li>Profile setup guidance</li><li>Delivered within 7 days</li></ul><button class="pkg-btn" onclick="openModal('Instagram — Spark','$79')">Get started →</button></div>
       <div class="pkg-c pop"><div class="pop-tag">Most popular</div><div class="pkg-tier">Ignite</div><div class="pkg-name">Accelerate</div><div class="pkg-sub">For creators ready to move past basics</div><div class="pkg-pr"><sup>$</sup>199</div><div class="pkg-was">&nbsp;</div><ul class="pkg-feats"><li>Multi-reel promotion system</li><li>Advanced engagement layering</li><li>Bio + profile optimization tips</li><li>7 viral content frameworks</li><li>Delivered within 10 days</li></ul><button class="pkg-btn" onclick="openModal('Instagram — Ignite','$199')">Get started →</button></div>
       <div class="pkg-c"><div class="pkg-tier">Momentum</div><div class="pkg-name">Consistent</div><div class="pkg-sub">For creators serious about steady growth</div><div class="pkg-pr"><sup>$</sup>399</div><div class="pkg-was">&nbsp;</div><ul class="pkg-feats"><li>Sustained promotion campaign</li><li>Full profile positioning audit</li><li>14-day content strategy plan</li><li>Niche targeting direction</li><li>10 viral hook templates</li><li>Delivered within 14 days</li></ul><button class="pkg-btn" onclick="openModal('Instagram — Momentum','$399')">Get started →</button></div>
       <div class="pkg-c"><div class="pkg-tier">Influence</div><div class="pkg-name">Brand ready</div><div class="pkg-sub">For creators building a personal brand</div><div class="pkg-pr"><sup>$</sup>799</div><div class="pkg-was">&nbsp;</div><ul class="pkg-feats"><li>Long-term promotion system</li><li>Full profile audit + overhaul</li><li>Content pillar framework</li><li>30-day strategy plan</li><li>1-on-1 strategy call (30 min)</li><li>Brand deal starter guide</li><li>Delivered within 21 days</li></ul><button class="pkg-btn" onclick="openModal('Instagram — Influence','$799')">Get started →</button></div>
     </div>
 
-    <div id="yt-pkg" class="pkg-grid sg" style="display:none">
+    <div id="yt-pkg" class="pkg-grid" style="display:none">
       <div class="pkg-c"><div class="pkg-tier">YT Spark</div><div class="pkg-name">Foundation</div><div class="pkg-sub">Build your first real audience</div><div class="pkg-pr"><sup>$</sup>399</div><div class="pkg-was">&nbsp;</div><ul class="pkg-feats"><li>Channel promotion activation</li><li>Initial video visibility push</li><li>Watch-time signal support</li><li>Channel structure guidance</li><li>First 5–7 video content ideas</li><li>Delivered within 14 days</li></ul><button class="pkg-btn" onclick="openModal('YouTube — Foundation','$399')">Get started →</button></div>
       <div class="pkg-c pop"><div class="pop-tag">Most popular</div><div class="pkg-tier">YT Momentum</div><div class="pkg-name">Accelerate</div><div class="pkg-sub">Turn content into consistent growth</div><div class="pkg-pr"><sup>$</sup>799</div><div class="pkg-was">&nbsp;</div><ul class="pkg-feats"><li>Sustained channel promotion</li><li>Watch-time optimization strategy</li><li>Titles, thumbnails &amp; hook guide</li><li>14-day content strategy plan</li><li>Niche direction coaching</li><li>Delivered within 21 days</li></ul><button class="pkg-btn" onclick="openModal('YouTube — Accelerate','$799')">Get started →</button></div>
       <div class="pkg-c"><div class="pkg-tier">YT Authority</div><div class="pkg-name">Scale</div><div class="pkg-sub">Build a channel with real authority</div><div class="pkg-pr"><sup>$</sup>1,299</div><div class="pkg-was">&nbsp;</div><ul class="pkg-feats"><li>Advanced channel promotion</li><li>Retention strategy system</li><li>30-day content strategy plan</li><li>Viral content framework</li><li>1-on-1 strategy call (45 min)</li><li>Priority support throughout</li><li>Delivered within 30 days</li></ul><button class="pkg-btn" onclick="openModal('YouTube — Scale','$1,299')">Get started →</button></div>
@@ -1674,7 +1677,7 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
       <div class="faq-lc">
         <p class="body-t" style="font-size:14px">Six of the most common questions we receive from creators before starting their first campaign with Inflorax.</p>
         <div style="margin-top:28px">
-          <button class="btn-d btn-orange" onclick="go('packages')" style="width:100%;justify-content:center">View packages →</button>
+          <button class="btn-d btn-blue" onclick="go('packages')" style="width:100%;justify-content:center">View packages →</button>
         </div>
       </div>
       <div class="faq-list">
@@ -1697,7 +1700,7 @@ footer{background:#111;border-top:3px solid var(--blue);padding:48px 28px 40px;d
     <h2 class="cta-h2 rv" style="transition-delay:.06s">This is where your content<br>starts getting <em>seen.</em></h2>
     <p class="cta-sub rv" style="transition-delay:.12s">If you've been stuck and waiting for things to change — this is your next step.</p>
     <div class="cta-btns rv" style="transition-delay:.18s">
-      <button class="btn-d btn-orange" onclick="go('packages')">View packages →</button>
+      <button class="btn-d btn-blue" onclick="go('packages')">View packages →</button>
       <button class="btn-o" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)" onmouseover="this.style.background='var(--white)';this.style.color='var(--ink)'" onmouseout="this.style.background='transparent';this.style.color='rgba(255,255,255,0.6)'" onclick="openAudit()">Get free audit</button>
     </div>
     <div class="cta-trust rv" style="transition-delay:.24s">No passwords required · Secure checkout via Stripe · Results depend on your content and consistency</div>
@@ -1969,10 +1972,24 @@ if(!document.querySelector('style[data-nav-scroll]')){
 
 /* ════ MOBILE MENU ════ */
 var menuOpen=false;
-function toggleMenu(){menuOpen=!menuOpen;document.getElementById('drawer').classList.toggle('open',menuOpen);document.getElementById('ham').classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':'';}
-function closeMenu(){menuOpen=false;document.getElementById('drawer').classList.remove('open');document.getElementById('ham').classList.remove('open');document.body.style.overflow='';}
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  var d=document.getElementById('drawer');
+  var h=document.getElementById('ham');
+  if(d) d.classList.toggle('open',menuOpen);
+  if(h) h.classList.toggle('open',menuOpen);
+  document.body.style.overflow=menuOpen?'hidden':'';
+}
+function closeMenu(){
+  menuOpen=false;
+  var d=document.getElementById('drawer');
+  var h=document.getElementById('ham');
+  if(d) d.classList.remove('open');
+  if(h) h.classList.remove('open');
+  document.body.style.overflow='';
+}
 function scrollTo0(){window.scrollTo({top:0,behavior:'smooth'});}
-function go(id){var el=document.getElementById(id);if(el){closeMenu();el.scrollIntoView({behavior:'smooth',block:'start'});}}
+function go(id){closeMenu();setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},80);}
 
 /* ════ REVEAL ════ */
 function revealAll(){document.querySelectorAll('.rv,.sg').forEach(function(el){el.classList.add('in');});}
@@ -2025,7 +2042,14 @@ stepEls.forEach(function(el){el.addEventListener('click',function(){clearInterva
 function togglePma(el){var open=el.classList.contains('open');document.querySelectorAll('.pma.open').forEach(function(e){e.classList.remove('open');});if(!open)el.classList.add('open');}
 
 /* ════ PACKAGES ════ */
-function setPlat(p,btn){document.querySelectorAll('.pkg-tab').forEach(function(t){t.classList.remove('on');});btn.classList.add('on');document.getElementById('ig-pkg').style.display=p==='ig'?'grid':'none';document.getElementById('yt-pkg').style.display=p==='yt'?'grid':'none';}
+function setPlat(p,btn){
+  document.querySelectorAll('.pkg-tab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  var ig=document.getElementById('ig-pkg');
+  var yt=document.getElementById('yt-pkg');
+  if(ig){ig.style.cssText=p==='ig'?'display:grid':'display:none';}
+  if(yt){yt.style.cssText=p==='yt'?'display:grid':'display:none';}
+}
 
 /* ════ SIMULATOR ════ */
 var MAX_R=10000*14*.15*12*3.8;
