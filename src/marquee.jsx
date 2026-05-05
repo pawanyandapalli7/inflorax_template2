@@ -4,16 +4,16 @@ const Marquee = ({words, speed=42, reverse=false, big=true}) => {
 
   // Mobile pill data — word + emoji pairs
   const pills = [
-    {w:'Visibility',  e:'👀'},
-    {w:'Reach',       e:'🌐'},
-    {w:'Growth',      e:'🌱'},
-    {w:'Promotion',   e:'📣'},
-    {w:'Discovery',   e:'🔦'},
-    {w:'Audience',    e:'🙌'},
+    {w:'Visibility',  e:'👁️'},
+    {w:'Reach',       e:'📡'},
+    {w:'Growth',      e:'📈'},
+    {w:'Promotion',   e:'🚀'},
+    {w:'Discovery',   e:'🔍'},
+    {w:'Audience',    e:'👥'},
     {w:'Momentum',    e:'⚡'},
-    {w:'Exposure',    e:'💡'},
-    {w:'Engagement',  e:'❤️'},
-    {w:'Results',     e:'✅'},
+    {w:'Exposure',    e:'✨'},
+    {w:'Engagement',  e:'💬'},
+    {w:'Results',     e:'🎯'},
   ];
 
   return (
@@ -45,16 +45,16 @@ const Marquee = ({words, speed=42, reverse=false, big=true}) => {
       </div>
 
       {/* Mobile — animated pill grid */}
-      <div className="mq-mobile" style={{ padding:'24px 16px', display:'none' }}>
+      <div className="mq-mobile" style={{ padding:'28px 20px', display:'none' }}>
         <div style={{
-          display:'flex', flexWrap:'wrap', gap:10, justifyContent:'center', alignItems:'center',
+          display:'flex', flexWrap:'wrap', gap:10, justifyContent:'center',
         }}>
           {pills.map(({w, e}, i) => {
             const isAccent = i % 3 === 1;
             return (
               <div key={w} style={{
                 display:'inline-flex', alignItems:'center', gap:7,
-                padding:'12px 18px', borderRadius:999,
+                padding:'10px 16px', borderRadius:999,
                 background: isAccent ? 'var(--accent)' : 'rgba(22,101,52,.08)',
                 border: `1.5px solid ${isAccent ? 'var(--accent)' : 'rgba(22,101,52,.15)'}`,
                 animation:`pillFade .5s ease both`,
@@ -62,7 +62,7 @@ const Marquee = ({words, speed=42, reverse=false, big=true}) => {
               }}>
                 <span style={{fontSize:15}}>{e}</span>
                 <span style={{
-                  fontFamily:'var(--sans)', fontWeight:700, fontSize:15,
+                  fontFamily:'var(--sans)', fontWeight:700, fontSize:14,
                   letterSpacing:'-.01em',
                   color: isAccent ? '#fff' : 'var(--ink)',
                 }}>{w}</span>
@@ -73,9 +73,9 @@ const Marquee = ({words, speed=42, reverse=false, big=true}) => {
 
         {/* Tagline below pills on mobile */}
         <p style={{
-          marginTop:18, textAlign:'center',
+          marginTop:20, textAlign:'center',
           fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300,
-          fontSize:16, color:'var(--ink-3)', lineHeight:1.5,
+          fontSize:17, color:'var(--ink-2)', lineHeight:1.5,
         }}>
           Everything your content needs to get <span style={{color:'var(--accent)', fontStyle:'normal', fontFamily:'var(--sans)', fontWeight:700}}>seen.</span>
         </p>

@@ -1,9 +1,9 @@
 // PROCESS — dark warm Kinetic
 const steps = [
-  {n:'01', t:'Choose your plan — takes 30 seconds', d:"Pick a plan based on where you are. Spark if you're starting out, Ignite if you're stuck, Momentum and above if you're serious.", icon:'pkg'},
-  {n:'02', t:'Share your handle — no passwords, ever', d:'Fill in a 2-minute form — your handle, niche, and goals. No passwords, no admin access, no complicated setup.', icon:'form'},
-  {n:'03', t:'We get to work — you do nothing', d:'We run your promotion campaign across the right channels. Real accounts, real reach. You just keep posting.', icon:'rocket'},
-  {n:'04', t:'Your content reaches more people', d:"More people see your content. Your follower count moves. Your engagement picks up. That's the whole point.", icon:'chart'},
+  {n:'01', t:'Pick what fits you', orig:'Choose your package', d:"Choose a plan based on where you are right now. You don't need to overthink it.", icon:'pkg'},
+  {n:'02', t:'Tell us about your account', orig:'Complete onboarding', d:'A quick 2–3 minute form. No passwords. No access needed.', icon:'form'},
+  {n:'03', t:'We start your growth', orig:'We begin work', d:'We begin working on your content visibility. You may start noticing changes within a few days.', icon:'rocket'},
+  {n:'04', t:'You see real movement', orig:'Summary delivered', d:'Your content starts reaching more people. Your growth finally begins to move forward.', icon:'chart'},
 ];
 
 const Process = () => {
@@ -31,11 +31,11 @@ const Process = () => {
           <div>
             <span className="reveal" style={window.labelStyle}>How it works</span>
             <h2 className="wreveal" style={{...window.bigHeadStyle(), fontSize:'clamp(44px, 8vw, 132px)', marginTop:14}}>
-              Four steps.<br/><window.Em>Real results.</window.Em>
+              Get your content seen.
             </h2>
           </div>
           <p className="reveal reveal-d2" style={{fontSize:17, lineHeight:1.55, color:'var(--ink-2)', maxWidth:480, justifySelf:'end', fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300}}>
-            No complicated setup. No waiting around. Just a clear process from picking a plan to seeing real movement.
+            Simple steps to get your content seen. No confusion. No complicated setup. Just a clear process.
           </p>
         </header>
 
@@ -43,28 +43,22 @@ const Process = () => {
           <div style={{position:'sticky', top:120, alignSelf:'start', height:'min(64vh, 520px)'}} className="proc-sticky">
             <ProcessVisual idx={active}/>
           </div>
-          <div style={{display:'flex', flexDirection:'column', gap:8}}>
+          <div style={{display:'flex', flexDirection:'column', gap:10}}>
             {steps.map((s, i) => (
-              <div key={i}
-                onMouseEnter={() => setActive(i)}
-                onClick={() => setActive(i)}
-                className="reveal proc-step"
-                style={{
-                  padding:'20px 22px', borderRadius:16,
-                  background: active===i ? 'rgba(22,101,52,.07)' : 'transparent',
-                  border:'1px solid',
-                  borderColor: active===i ? 'rgba(22,101,52,.2)' : 'transparent',
-                  borderLeft: active===i ? '3px solid var(--accent)' : '3px solid transparent',
-                  transition:'all .3s', cursor:'pointer',
-                }}>
-                <div style={{display:'flex', alignItems:'baseline', gap:16}}>
-                  <span style={{fontFamily:'var(--mono)', fontSize:12, color: active===i ? 'var(--accent)' : 'var(--ink-3)', fontWeight:700, flexShrink:0, transition:'color .3s'}}>{s.n}</span>
+              <div key={i} onMouseEnter={() => setActive(i)} className="reveal" style={{
+                padding:'24px 26px', borderRadius:18,
+                background: active===i ? 'rgba(22,101,52,.08)' : 'transparent',
+                border:'1px solid', borderColor: active===i ? 'rgba(22,101,52,.3)' : 'transparent',
+                transition:'all .35s', cursor:'pointer',
+                opacity: active===i ? 1 : .6,
+              }}>
+                <div style={{display:'flex', alignItems:'baseline', gap:18}}>
+                  <span style={{fontFamily:'var(--mono)', fontSize:13, color:'var(--accent)', fontWeight:700}}>{s.n}</span>
                   <div style={{flex:1}}>
-                    <h3 style={{fontFamily:'var(--sans)', fontWeight:800, fontSize:'clamp(18px, 2.8vw, 30px)', letterSpacing:'-.02em', lineHeight:1.1, color: active===i ? 'var(--ink)' : 'var(--ink-2)', textTransform:'uppercase', transition:'color .3s'}}>
+                    <h3 style={{fontFamily:'var(--sans)', fontWeight:800, fontSize:'clamp(22px, 2.8vw, 32px)', letterSpacing:'-.02em', lineHeight:1.05, color:'var(--ink)', textTransform:'uppercase'}}>
                       {s.t}
                     </h3>
-                    {/* Desktop: collapse inactive. Mobile: always show */}
-                    <p className="proc-step-desc" style={{marginTop:8, fontSize:13, lineHeight:1.55, color:'var(--ink-2)', maxHeight: active===i ? 200 : 0, overflow:'hidden', transition:'max-height .35s', opacity: active===i ? 1 : 0}}>{s.d}</p>
+                    <p style={{marginTop:10, fontSize:14, lineHeight:1.55, color:'var(--ink-2)', maxHeight: active===i ? 200 : 0, overflow:'hidden', transition:'max-height .35s'}}>{s.d}</p>
                   </div>
                 </div>
               </div>
@@ -74,7 +68,7 @@ const Process = () => {
         {/* CTA after process */}
         <div className="reveal" style={{marginTop:56, textAlign:'center'}}>
           <p style={{fontSize:16, color:'var(--ink-2)', marginBottom:20, fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300}}>
-            That's the whole process. No fluff, no waiting, no passwords.
+            That's it. No complicated setup. Just results.
           </p>
           <div style={{display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap'}}>
             <window.Btn primary href="#" onClick={e=>{e.preventDefault();window.scrollToSection&&window.scrollToSection("pricing");}}>View packages →</window.Btn>
@@ -84,15 +78,12 @@ const Process = () => {
 
         <style>{`
           @media(max-width:900px){
-            .proc-head{grid-template-columns:1fr !important; gap:12px}
-            .proc-head p{display:none}
-            .proc-body{grid-template-columns:1fr !important; gap:20px; display:flex !important; flex-direction:column-reverse}
-            .proc-sticky{position:relative !important; top:0 !important; height:380px !important; min-height:380px}
-            .proc-step-desc{max-height:200px !important; opacity:1 !important}
-            .proc-step{opacity:1 !important; padding:14px 16px !important}
+            .proc-head{grid-template-columns:1fr !important; gap:16px}
+            .proc-body{grid-template-columns:1fr !important; gap:24px; display:flex !important; flex-direction:column-reverse}
+            .proc-sticky{position:relative !important; top:0 !important; height:280px !important; min-height:280px}
           }
-          @media(max-width:480px){
-            .proc-sticky{height:340px !important; min-height:340px}
+          @media(max-width:600px){
+            .proc-sticky{height:240px !important; min-height:240px}
           }
         `}</style>
       </div>
@@ -103,7 +94,7 @@ const Process = () => {
 const ProcessVisual = ({idx}) => {
   const cards = [
     {
-      step:'01', title:'Choose your plan',
+      step:'01', title:'Pick a plan',
       items:[
         {name:'Spark', price:'$79', highlight:false},
         {name:'Ignite', price:'$199', highlight:true},
@@ -112,7 +103,7 @@ const ProcessVisual = ({idx}) => {
       ],
     },
     {
-      step:'02', title:'Share your handle',
+      step:'02', title:'Tell us about your account',
       items:[
         {label:'Handle', value:'@yourchannel'},
         {label:'Niche', value:'Lifestyle'},
@@ -121,7 +112,7 @@ const ProcessVisual = ({idx}) => {
       ],
     },
     {
-      step:'03', title:'We get to work',
+      step:'03', title:'We start your growth',
       items:[
         {icon:'🚀', text:'Campaign launched'},
         {icon:'📡', text:'Content promoted'},
@@ -130,7 +121,7 @@ const ProcessVisual = ({idx}) => {
       ],
     },
     {
-      step:'04', title:'Your content reaches more people',
+      step:'04', title:'You see real movement',
       items:[
         {label:'Reach', value:'↑ Rising', green:true},
         {label:'Followers', value:'↑ Growing', green:true},
@@ -144,11 +135,11 @@ const ProcessVisual = ({idx}) => {
 
   return (
     <div style={{
-      height:'100%', minHeight:400,
+      height:'100%', minHeight:240,
       background:'linear-gradient(160deg, #0a190c, #0f1f0f)',
       border:'1px solid rgba(22,101,52,.3)', borderRadius:20,
-      padding:24, display:'flex', flexDirection:'column',
-      color:'var(--bone)', overflow:'hidden',
+      padding:24, display:'flex', flexDirection:'column', gap:16,
+      color:'var(--bone)',
     }}>
       {/* Header */}
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
@@ -181,22 +172,22 @@ const ProcessVisual = ({idx}) => {
       )}
 
       {idx === 1 && (
-        <div style={{flex:1, display:'flex', flexDirection:'column', gap:10, justifyContent:'center', minHeight:0}}>
+        <div style={{display:'flex', flexDirection:'column', gap:8, flex:1, justifyContent:'center'}}>
           {card.items.map((f,i) => (
-            <div key={i} style={{display:'flex', alignItems:'center', gap:12, background:'rgba(240,246,232,.05)', borderRadius:10, padding:'14px 16px', border:'1px solid rgba(240,246,232,.1)'}}>
-              <span style={{fontSize:9, fontFamily:'var(--mono)', color:'rgba(240,246,232,.4)', textTransform:'uppercase', letterSpacing:'.08em', minWidth:70}}>{f.label}</span>
-              <span style={{fontSize:15, color:'rgba(240,246,232,.85)', fontWeight:600}}>{f.value}</span>
+            <div key={i} style={{display:'flex', alignItems:'center', gap:10, background:'rgba(240,246,232,.04)', borderRadius:8, padding:'9px 12px', border:'1px solid rgba(240,246,232,.08)'}}>
+              <span style={{fontSize:9, fontFamily:'var(--mono)', color:'rgba(240,246,232,.4)', textTransform:'uppercase', letterSpacing:'.08em', minWidth:60}}>{f.label}</span>
+              <span style={{fontSize:13, color:'rgba(240,246,232,.8)', fontWeight:500}}>{f.value}</span>
             </div>
           ))}
         </div>
       )}
 
       {idx === 2 && (
-        <div style={{flex:1, display:'grid', gridTemplateColumns:'1fr 1fr', gridAutoRows:'1fr', gap:10, minHeight:0}}>
+        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, flex:1, alignItems:'center'}}>
           {card.items.map((it,i) => (
-            <div key={i} style={{padding:'18px 14px', borderRadius:12, background:'rgba(240,246,232,.05)', border:'1px solid rgba(240,246,232,.1)', display:'flex', flexDirection:'column', gap:10, justifyContent:'center'}}>
-              <span style={{fontSize:30}}>{it.icon}</span>
-              <span style={{fontSize:13, color:'rgba(240,246,232,.75)', lineHeight:1.3, fontWeight:500}}>{it.text}</span>
+            <div key={i} style={{padding:'12px 10px', borderRadius:10, background:'rgba(240,246,232,.05)', border:'1px solid rgba(240,246,232,.1)', display:'flex', alignItems:'center', gap:8}}>
+              <span style={{fontSize:20}}>{it.icon}</span>
+              <span style={{fontSize:12, color:'rgba(240,246,232,.75)', lineHeight:1.3}}>{it.text}</span>
             </div>
           ))}
         </div>
@@ -206,15 +197,15 @@ const ProcessVisual = ({idx}) => {
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, flex:1, alignItems:'center'}}>
           {card.items.map((it,i) => (
             <div key={i} style={{padding:'12px 10px', borderRadius:10, background:'rgba(22,101,52,.12)', border:'1px solid rgba(22,101,52,.25)'}}>
-              <div style={{fontSize:10, fontFamily:'var(--mono)', color:'rgba(240,246,232,.45)', textTransform:'uppercase', letterSpacing:'.06em', marginBottom:6}}>{it.label}</div>
-              <div style={{fontWeight:800, fontSize:20, color:'#4ade80', letterSpacing:'-.01em'}}>{it.value}</div>
+              <div style={{fontSize:9, fontFamily:'var(--mono)', color:'rgba(240,246,232,.45)', textTransform:'uppercase', letterSpacing:'.06em', marginBottom:4}}>{it.label}</div>
+              <div style={{fontWeight:800, fontSize:16, color:'#4ade80', letterSpacing:'-.01em'}}>{it.value}</div>
             </div>
           ))}
         </div>
       )}
 
       {/* Step title */}
-      <div style={{fontFamily:'var(--sans)', fontWeight:800, fontSize:14, letterSpacing:'.02em', color:'rgba(240,246,232,.4)', textTransform:'uppercase', marginTop:12, fontFamily:'var(--mono)'}}>
+      <div style={{fontFamily:'var(--sans)', fontWeight:800, fontSize:15, letterSpacing:'-.01em', color:'rgba(240,246,232,.6)', textTransform:'uppercase'}}>
         {card.title}
       </div>
     </div>

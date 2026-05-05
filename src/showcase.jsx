@@ -15,11 +15,11 @@ const Showcase = () => {
   const cur = NICHES[active];
 
   return (
-    <window.Section id="showcase" padded bg="#0a160a">
+    <window.Section id="showcase" padded>
       <div className="wrap">
         <div style={{marginBottom:48}}>
-          <span className="reveal" style={{...window.labelStyle, color:"rgba(240,246,232,.5)"}}>Niches we serve</span>
-          <h2 className="wreveal" style={{...window.bigHeadStyle(), fontSize:'clamp(40px,7vw,108px)', marginTop:14, color:'var(--bone)'}}>
+          <span className="reveal" style={window.labelStyle}>Niches we serve</span>
+          <h2 className="wreveal" style={{...window.bigHeadStyle(), fontSize:'clamp(40px,7vw,108px)', marginTop:14}}>
             We grow creators<br/><window.Em>across every niche.</window.Em>
           </h2>
         </div>
@@ -108,11 +108,6 @@ const Showcase = () => {
 
         {/* Mobile — horizontal scroll strip */}
         <div className="showcase-mobile-scroll" style={{display:'none', marginTop:0}}>
-          {/* Swipe hint */}
-          <div style={{display:'flex', alignItems:'center', justifyContent:'flex-end', gap:6, marginBottom:10, paddingRight:4}}>
-            <span style={{fontSize:12, color:'var(--ink-3)', fontFamily:'var(--mono)', letterSpacing:'.06em', textTransform:'uppercase'}}>Swipe to explore</span>
-            <span style={{fontSize:14, color:'var(--accent)'}}>→</span>
-          </div>
           <div style={{
             display:'flex', gap:14, overflowX:'auto', paddingBottom:16,
             scrollSnapType:'x mandatory', WebkitOverflowScrolling:'touch',
@@ -168,7 +163,7 @@ const Showcase = () => {
             {NICHES.map((_,i) => (
               <div key={i} style={{
                 width: active===i ? 24 : 6, height:6, borderRadius:999,
-                background: active===i ? 'var(--accent)' : 'rgba(240,246,232,.2)',
+                background: active===i ? 'var(--accent)' : 'var(--line)',
                 transition:'all .3s',
               }}/>
             ))}
@@ -180,7 +175,7 @@ const Showcase = () => {
           {NICHES.map((_,i) => (
             <button key={i} onClick={() => setActive(i)} style={{
               width: active===i ? 28 : 8, height:8, borderRadius:999,
-              background: active===i ? 'var(--accent)' : 'rgba(240,246,232,.2)',
+              background: active===i ? 'var(--accent)' : 'var(--line)',
               border:'none', cursor:'pointer', transition:'all .3s',
             }}/>
           ))}

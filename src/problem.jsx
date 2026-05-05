@@ -1,10 +1,10 @@
 // PROBLEM — dark warm Kinetic
 const Problem = () => {
   return (
-    <window.Section id="problem" padded bg="#0f1f0f">
+    <window.Section id="problem" padded>
       <div className="wrap">
         <header style={{textAlign:'center', marginBottom:60, maxWidth:980, margin:'0 auto 60px'}}>
-          <span className="reveal" style={{...window.labelStyle, color:"rgba(240,246,232,.55)"}}>Where most creators get stuck</span>
+          <span className="reveal" style={window.labelStyle}>Where most creators get stuck</span>
           <h2 className="wreveal" style={{...window.bigHeadStyle(), fontSize:'clamp(44px, 8vw, 132px)', marginTop:18}}>
             The stage no one talks about.
           </h2>
@@ -20,12 +20,11 @@ const Problem = () => {
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}} className="prob-grid">
           {/* LEFT — feeling */}
           <div className="reveal prob-card" style={{
-            background:'rgba(240,246,232,.04)', border:'1px solid rgba(240,246,232,.08)',
-            borderRadius:24, padding:'36px 32px', backdropFilter:'blur(12px)',
-            boxShadow:'inset 0 1px 0 rgba(240,246,232,.06)',
+            background:'rgba(15,31,15,.04)', border:'1px solid var(--line)',
+            borderRadius:24, padding:'36px 32px', backdropFilter:'blur(8px)',
           }}>
             <span style={{...window.labelStyle, marginBottom:18, display:'inline-flex'}}>The feeling</span>
-            <ul style={{listStyle:'none', display:'flex', flexDirection:'column', gap:10, fontSize:16, lineHeight:1.55, color:'rgba(240,246,232,.7)', marginTop:14}}>
+            <ul style={{listStyle:'none', display:'flex', flexDirection:'column', gap:10, fontSize:16, lineHeight:1.55, color:'var(--ink-2)', marginTop:14}}>
               <li>You post regularly.</li>
               <li>You try different types of videos.</li>
               <li>You put effort into your content.</li>
@@ -34,11 +33,11 @@ const Problem = () => {
               But nothing changes.
             </p>
             <div style={{marginTop:24, padding:'18px 20px', background:'rgba(15,31,15,.05)', borderRadius:14, border:'1px solid var(--line-soft)'}}>
-              <div style={{fontSize:11, fontFamily:'var(--mono)', color:'rgba(240,246,232,.4)', textTransform:'uppercase', letterSpacing:'.1em', marginBottom:12}}>And slowly you start thinking…</div>
-              <div style={{display:'flex', flexDirection:'column', gap:10, fontSize:14, color:'rgba(240,246,232,.65)'}}>
-                {['"Maybe my content is not good enough."','"Do I need a better phone?"','"Am I doing something wrong?"'].map((q,i) => (
-                  <span key={i} style={{paddingLeft:14, borderLeft:'2px solid var(--accent)', fontStyle:'italic', lineHeight:1.5, opacity:.7+i*.1}}>{q}</span>
-                ))}
+              <div style={{fontSize:11, fontFamily:'var(--mono)', color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'.1em', marginBottom:12}}>And slowly you start thinking…</div>
+              <div style={{display:'flex', flexDirection:'column', gap:8, fontSize:14, color:'var(--ink-2)'}}>
+                <span style={{paddingLeft:12, borderLeft:'2px solid var(--accent)', fontStyle:'italic'}}>"Maybe my content is not good enough."</span>
+                <span style={{paddingLeft:12, borderLeft:'2px solid var(--accent)', fontStyle:'italic'}}>"Do I need a better phone?"</span>
+                <span style={{paddingLeft:12, borderLeft:'2px solid var(--accent)', fontStyle:'italic'}}>"Am I doing something wrong?"</span>
               </div>
             </div>
             <p style={{marginTop:20, fontSize:14, fontWeight:700, color:'var(--ink)', lineHeight:1.5}}>
@@ -74,16 +73,16 @@ const Problem = () => {
           </div>
         </div>
         {/* Bridge to next section */}
-        <div className="reveal" style={{marginTop:36, display:'flex', alignItems:'center', justifyContent:'center', gap:12, flexWrap:'wrap', padding:'0 16px'}}>
-          <span style={{fontSize:15, color:'rgba(240,246,232,.65)', fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:600}}>You're not alone. This is where most creators get stuck.</span>
+        <div className="reveal" style={{marginTop:48, display:'flex', alignItems:'center', justifyContent:'center', gap:16, flexWrap:'wrap'}}>
+          <span style={{fontSize:15, color:'var(--ink-2)', fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:600}}>You're not alone. This is where most creators get stuck.</span>
           <a href="#" onClick={e=>{e.preventDefault();window.scrollToSection&&window.scrollToSection("process");}} style={{
             display:'inline-flex', alignItems:'center', gap:8,
-            fontSize:15, fontWeight:700, color:'#fff', textDecoration:'none',
-            background:'var(--accent)', padding:'12px 22px', borderRadius:999,
-            transition:'opacity .2s', boxShadow:'0 4px 16px rgba(22,101,52,.3)',
+            fontSize:14, fontWeight:700, color:'var(--accent)', textDecoration:'none',
+            borderBottom:'1.5px solid var(--accent-l)', paddingBottom:2,
+            transition:'border-color .2s',
           }}
-          onMouseEnter={e=>e.currentTarget.style.opacity='.85'}
-          onMouseLeave={e=>e.currentTarget.style.opacity='1'}>
+          onMouseEnter={e=>e.currentTarget.style.borderColor='var(--accent)'}
+          onMouseLeave={e=>e.currentTarget.style.borderColor='var(--accent-l)'}>
             See how we fix it →
           </a>
         </div>
@@ -91,7 +90,6 @@ const Problem = () => {
         <style>{`
           @media(max-width:900px){.prob-grid{grid-template-columns:1fr !important; gap:16px}}
           @media(max-width:480px){.prob-card{padding:24px 20px !important}}
-          @media(max-width:480px){.prob-card p{font-size:14px !important}}
         `}</style>
       </div>
     </window.Section>

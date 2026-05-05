@@ -47,7 +47,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="site" style={{ background: 'linear-gradient(180deg, #0a1a0a 0%, #0c190c 100%)', position: 'relative', overflow: 'hidden', borderTop: 'none' }}>
+    <footer className="site" style={{ background: '#0c190c', position: 'relative', overflow: 'hidden', borderTop: '1px solid var(--line)' }}>
       {/* Particle canvas */}
       <canvas id="footer-canvas" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0, opacity: .6 }}/>
       {/* Top glow line */}

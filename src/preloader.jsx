@@ -125,27 +125,16 @@ const Preloader = () => {
             color: '#fff',
             textTransform: 'uppercase',
           }}>INFLORAX</span>
-          {/* Green dot with pulse ring */}
-          <div style={{position:'relative', marginLeft:8, flexShrink:0}}>
-            <div style={{
-              position:'absolute', inset:-8, borderRadius:'50%',
-              border:'1.5px solid rgba(34,197,94,.3)',
-              animation:'wsDotPulse 2s ease-in-out infinite',
-            }}/>
-            <div style={{
-              position:'absolute', inset:-18, borderRadius:'50%',
-              border:'1px solid rgba(34,197,94,.15)',
-              animation:'wsDotPulse 2s ease-in-out infinite .4s',
-            }}/>
-            <div style={{
-              width: 'clamp(44px, 9vw, 112px)',
-              height: 'clamp(44px, 9vw, 112px)',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #22c55e, #166534)',
-              boxShadow: '0 0 60px rgba(34,197,94,.4), 0 0 120px rgba(22,101,52,.25)',
-              position:'relative', zIndex:1,
-            }}/>
-          </div>
+          {/* Green dot */}
+          <div style={{
+            width: 'clamp(44px, 9vw, 112px)',
+            height: 'clamp(44px, 9vw, 112px)',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #22c55e, #166534)',
+            marginLeft: 8,
+            flexShrink: 0,
+            boxShadow: '0 0 60px rgba(34,197,94,.35), 0 0 120px rgba(22,101,52,.2)',
+          }}/>
         </div>
 
         {/* Tagline */}
@@ -181,10 +170,6 @@ const Preloader = () => {
         @keyframes wsScan {
           0%   { transform: translateX(-100%) }
           100% { transform: translateX(100%) }
-        }
-        @keyframes wsDotPulse {
-          0%, 100% { transform: scale(1); opacity:.6 }
-          50%       { transform: scale(1.15); opacity:.2 }
         }
       `}</style>
     </div>

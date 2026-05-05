@@ -11,7 +11,7 @@ const About = () => (
             Small team.<br/><window.Em>Real results.</window.Em>
           </h2>
           <p className="reveal reveal-d2" style={{marginTop:24, fontSize:17, lineHeight:1.7, color:'var(--ink-2)', maxWidth:480}}>
-            <strong style={{color:'var(--ink)', fontStyle:'normal', fontFamily:'var(--sans)', fontWeight:800}}>Inflorax</strong> is a creator promotion studio focused entirely on one thing — getting your content seen by the right people on Instagram and YouTube.
+            Inflorax is a creator promotion studio focused entirely on one thing — getting your content seen by the right people on Instagram and YouTube.
           </p>
           <p className="reveal reveal-d3" style={{marginTop:16, fontSize:17, lineHeight:1.7, color:'var(--ink-2)', maxWidth:480}}>
             We don't do editing, scriptwriting, or strategy. We do promotion — properly, without bots, without fake accounts, and without ever asking for your password.

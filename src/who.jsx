@@ -5,33 +5,30 @@ const audiences = [
     t:"Posting… but no one's seeing it",
     d:"You're trying your best. Posting regularly. Following trends. But your videos don't reach people. You're waiting for something to click — but it never does.",
     cta:'You just need that first visibility push.',
-    accent:'#166534',
   },
   {
     n:'02', tag:'Plateau',
     t:'Your growth suddenly stopped',
     d:"You had some posts doing okay before. But now everything feels slow again. Less reach. Less engagement. And you don't know what changed.",
     cta:'You need momentum again.',
-    accent:'#0d6efd',
   },
   {
     n:'03', tag:'Serious creator',
     t:"You're serious… but something is missing",
     d:"You care about your content. You want to grow properly. But without visibility, even good content stays hidden.",
     cta:'You need the right push to move forward.',
-    accent:'#7c3aed',
   },
 ];
 
 const Who = () => (
   <window.Section id="who" padded>
     <div className="wrap">
-      <div style={{marginBottom:48}}>
+      <div style={{marginBottom:40}}>
         <span className="reveal" style={window.labelStyle}>This is for you</span>
         <h2 className="wreveal" style={{...window.bigHeadStyle(), fontSize:'clamp(40px,7vw,108px)', marginTop:14}}>
           If you feel stuck<br/>right now.
         </h2>
-        <p className="reveal reveal-d1" style={{marginTop:16, fontSize:17, color:'var(--ink-2)', maxWidth:560, lineHeight:1.65, fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300}}>
+        <p className="reveal reveal-d1" style={{marginTop:16, fontSize:16, color:'var(--ink-2)', maxWidth:600, lineHeight:1.6}}>
           No matter where you are in your journey — this is the stage where most creators struggle.
         </p>
       </div>
@@ -45,15 +42,13 @@ const Who = () => (
     <style>{`
       @media(max-width:900px){.who-grid{grid-template-columns:1fr !important}}
       @media(max-width:480px){.who-grid .who-card{padding:20px 18px !important}}
-      @media(max-width:480px){.who-card p{font-size:14px !important; margin-top:8px !important}}
     `}</style>
   </window.Section>
 );
 
-const WhoCard = ({n,t,tag,d,cta,accent='#166534'}) => (
+const WhoCard = ({n,t,tag,d,cta}) => (
   <div className="reveal who-card" style={{
-    background:'rgba(255,255,255,.85)', border:'1px solid rgba(22,101,52,.1)',
-    borderTop:`3px solid ${accent}`,
+    background:'rgba(255,255,255,.85)', border:'1px solid rgba(22,101,52,.15)',
     borderRadius:20, padding:'28px 24px',
     transition:'transform .25s, border-color .25s, box-shadow .25s',
     backdropFilter:'blur(8px)', display:'flex', flexDirection:'column',
@@ -62,7 +57,7 @@ const WhoCard = ({n,t,tag,d,cta,accent='#166534'}) => (
   onMouseLeave={e=>{e.currentTarget.style.transform='none';e.currentTarget.style.borderColor='var(--line)';e.currentTarget.style.boxShadow='none';}}>
     <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20}}>
       <span style={{fontFamily:'var(--mono)', fontSize:11, color:'var(--accent)', fontWeight:600}}>{n}</span>
-      <span style={{padding:'3px 10px', borderRadius:999, background:'var(--accent-l)', border:'1px solid rgba(22,101,52,.2)', fontSize:10, fontFamily:'var(--mono)', color: accent, textTransform:'uppercase', letterSpacing:'.08em'}}>{tag}</span>
+      <span style={{padding:'3px 10px', borderRadius:999, background:'var(--accent-l)', border:'1px solid rgba(22,101,52,.2)', fontSize:10, fontFamily:'var(--mono)', color:'var(--accent)', textTransform:'uppercase', letterSpacing:'.08em'}}>{tag}</span>
     </div>
     <h3 style={{fontFamily:'var(--sans)', fontWeight:800, fontSize:'clamp(18px,2vw,24px)', letterSpacing:'-.02em', lineHeight:1.15, color:'var(--ink)', marginBottom:12}}>{t}</h3>
     <p style={{fontSize:14, lineHeight:1.6, color:'var(--ink-2)', flex:1}}>{d}</p>

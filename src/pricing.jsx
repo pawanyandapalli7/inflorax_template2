@@ -154,7 +154,7 @@ const Pricing = () => {
   const plans = platform === 'instagram' ? igPlans : ytPlans;
 
   return (
-    <window.Section id="pricing" padded bg="#f7f9f5">
+    <window.Section id="pricing" padded>
       <div className="wrap">
         <header style={{textAlign:'center', maxWidth:900, margin:'0 auto 48px'}}>
           <span className="reveal" style={window.labelStyle}>Packages</span>
@@ -168,7 +168,7 @@ const Pricing = () => {
 
         {/* Platform toggle */}
         <div className="reveal" style={{display:'flex', justifyContent:'center', marginBottom:40}}>
-          <div style={{display:'inline-flex', gap:4, padding:5, borderRadius:999, background:'#fff', border:'1.5px solid rgba(22,101,52,.2)', boxShadow:'0 2px 12px rgba(22,101,52,.08)'}}>
+          <div style={{display:'inline-flex', gap:4, padding:5, borderRadius:999, background:'rgba(15,31,15,.06)', border:'1px solid var(--line)'}}>
             {[{k:'instagram',label:'Instagram'},{k:'youtube',label:'YouTube'}].map(p => (
               <button key={p.k} onClick={() => setPlatform(p.k)} style={{
                 padding:'10px 28px', borderRadius:999,
@@ -191,7 +191,7 @@ const Pricing = () => {
         </div>
 
         {/* Undecided CTA */}
-        <div className="reveal" style={{marginTop:32, padding:'22px 28px', background:'linear-gradient(135deg, rgba(22,101,52,.07), rgba(22,101,52,.04))', border:'1.5px solid rgba(22,101,52,.18)', borderRadius:20, display:'flex', alignItems:'center', justifyContent:'space-between', gap:20, flexWrap:'wrap', boxShadow:'0 4px 24px rgba(22,101,52,.06)'}}>
+        <div className="reveal" style={{marginTop:32, padding:'20px 24px', background:'rgba(22,101,52,.06)', border:'1px solid rgba(22,101,52,.15)', borderRadius:16, display:'flex', alignItems:'center', justifyContent:'space-between', gap:20, flexWrap:'wrap'}}>
           <p style={{fontSize:15, color:'var(--ink-2)', fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300}}>
             Not sure which plan fits you?
           </p>
@@ -224,8 +224,6 @@ const Pricing = () => {
           @media(max-width:720px){.price-grid{grid-template-columns:repeat(2,1fr) !important; gap:10px}}
           @media(max-width:480px){.price-grid{grid-template-columns:1fr !important; gap:12px}}
           @media(max-width:480px){.price-card-inner{padding:20px 16px 18px !important}}
-          @media(max-width:480px){.price-feat-list li:nth-child(n+4){display:none !important}}
-          @media(max-width:480px){.price-feat-more{display:block !important}}
         `}</style>
       </div>
     </window.Section>
@@ -251,8 +249,8 @@ const PriceCard = ({plan: p, showCount}) => {
       backdropFilter:'blur(8px)',
       transition:'transform .25s, border-color .25s, box-shadow .25s',
     }}
-    onMouseEnter={e => { e.currentTarget.style.borderColor='var(--accent)'; e.currentTarget.style.boxShadow='0 12px 48px rgba(22,101,52,.2)'; e.currentTarget.style.transform=isPop?'scale(1.05)':'translateY(-3px)'; }}
-    onMouseLeave={e => { e.currentTarget.style.borderColor=isPop?'var(--accent)':'var(--line)'; e.currentTarget.style.boxShadow=isPop?'0 8px 40px rgba(22,101,52,.18)':'0 2px 12px rgba(15,31,15,.05)'; e.currentTarget.style.transform=isPop?'scale(1.03)':'none'; }}>
+    onMouseEnter={e => { e.currentTarget.style.borderColor='var(--accent)'; e.currentTarget.style.boxShadow='0 8px 32px rgba(22,101,52,.12)'; }}
+    onMouseLeave={e => { e.currentTarget.style.borderColor=isPop?'var(--accent)':'var(--line)'; e.currentTarget.style.boxShadow='0 2px 12px rgba(15,31,15,.05)'; }}>
 
       {/* Top: n · tier-name small, emoji right, + popular badge inline */}
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:4}}>
@@ -312,7 +310,7 @@ const PriceCard = ({plan: p, showCount}) => {
       </div>
 
       {/* Features — tighter gap */}
-      <ul className="price-feat-list" style={{listStyle:'none', display:'flex', flexDirection:'column', gap:5, marginBottom:12, flex:1}}>
+      <ul style={{listStyle:'none', display:'flex', flexDirection:'column', gap:5, marginBottom:12, flex:1}}>
         {p.feats.slice(0, showCount).map((f, i) => (
           <li key={i} style={{display:'flex', gap:7, fontSize:12, lineHeight:1.4, color:'var(--ink-2)'}}>
             <span style={{color:'var(--accent)', fontWeight:700, fontSize:10, marginTop:1, flexShrink:0}}>✓</span>
@@ -321,10 +319,6 @@ const PriceCard = ({plan: p, showCount}) => {
         ))}
       </ul>
 
-      {/* Mobile: show more hint */}
-      <div className="price-feat-more" style={{display:'none', fontSize:11, color:'var(--ink-3)', fontFamily:'var(--mono)', marginBottom:8, marginTop:-6}}>
-        + {Math.max(0, showCount - 3)} more included
-      </div>
       {/* Best for */}
       <div style={{
         padding:'8px 10px', borderRadius:8, marginBottom:10,

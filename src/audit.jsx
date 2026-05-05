@@ -508,20 +508,16 @@ const AuditCTA = () => {
       <window.Section id="audit" padded>
         <div className="wrap">
           <div style={{
-            background:'linear-gradient(145deg, #0d1f0e 0%, #162a17 50%, #0a1a0b 100%)',
-            color:'var(--bone)', borderRadius:28,
-            padding:'clamp(32px,5vw,88px) clamp(20px,5vw,88px)', position:'relative', overflow:'hidden', textAlign:'center',
-            border:'1px solid rgba(22,101,52,.25)',
-            boxShadow:'0 40px 120px rgba(22,101,52,.15), inset 0 1px 0 rgba(240,246,232,.05)',
+            background:'var(--ink)', color:'var(--bone)', borderRadius:28,
+            padding:'clamp(48px,7vw,88px)', position:'relative', overflow:'hidden', textAlign:'center',
           }}>
-            <div style={{position:'absolute',top:-100,right:-100,width:400,height:400,borderRadius:'50%',background:'var(--accent)',opacity:.2,filter:'blur(90px)'}}/>
-            <div style={{position:'absolute',bottom:-120,left:-80,width:360,height:360,borderRadius:'50%',background:'#22c55e',opacity:.12,filter:'blur(80px)'}}/>
-            <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:600,height:200,borderRadius:'50%',background:'var(--accent)',opacity:.06,filter:'blur(60px)'}}/>
+            <div style={{position:'absolute',top:-100,right:-100,width:400,height:400,borderRadius:'50%',background:'var(--accent)',opacity:.15,filter:'blur(80px)'}}/>
+            <div style={{position:'absolute',bottom:-120,left:-80,width:360,height:360,borderRadius:'50%',background:'var(--accent)',opacity:.1,filter:'blur(80px)'}}/>
             <div style={{position:'relative', maxWidth:680, margin:'0 auto'}}>
               <span className="reveal" style={{...window.labelStyle, color:'rgba(240,246,232,.5)'}}>Free creator audit</span>
               <h2 className="reveal reveal-d1" style={{
                 marginTop:16, fontFamily:'var(--sans)', fontWeight:800,
-                fontSize:'clamp(28px,6vw,80px)', lineHeight:.95, letterSpacing:'-.04em',
+                fontSize:'clamp(36px,6vw,80px)', lineHeight:.95, letterSpacing:'-.04em',
               }}>
                 Get a real audit.<br/>Not a sales call.
               </h2>
@@ -533,16 +529,14 @@ const AuditCTA = () => {
               </p>
               <div className="reveal reveal-d3" style={{marginTop:32, display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap'}}>
                 <button onClick={() => setOpen(true)} style={{
-                  display:'inline-flex', alignItems:'center', gap:10,
-                  padding:'16px 32px', borderRadius:999,
-                  background:'#fff', color:'var(--accent)',
-                  fontSize:16, fontWeight:800, border:'none', cursor:'pointer',
-                  transition:'transform .22s, box-shadow .22s',
-                  boxShadow:'0 8px 32px rgba(0,0,0,.25)',
-                  letterSpacing:'-.01em',
+                  display:'inline-flex', alignItems:'center', gap:8,
+                  padding:'14px 28px', borderRadius:999,
+                  background:'var(--accent)', color:'#fff',
+                  fontSize:15, fontWeight:700, border:'none', cursor:'pointer',
+                  transition:'transform .2s',
                 }}
-                onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-3px)';e.currentTarget.style.boxShadow='0 16px 48px rgba(0,0,0,.3)';}}
-                onMouseLeave={e=>{e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,.25)';}}>
+                onMouseEnter={e=>e.currentTarget.style.transform='translateY(-2px)'}
+                onMouseLeave={e=>e.currentTarget.style.transform='none'}>
                   Start my free audit →
                 </button>
               </div>
