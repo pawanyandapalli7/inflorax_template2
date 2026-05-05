@@ -5,18 +5,21 @@ const audiences = [
     t:"Posting… but no one's seeing it",
     d:"You're trying your best. Posting regularly. Following trends. But your videos don't reach people. You're waiting for something to click — but it never does.",
     cta:'You just need that first visibility push.',
+    accent:'#166534',
   },
   {
     n:'02', tag:'Plateau',
     t:'Your growth suddenly stopped',
     d:"You had some posts doing okay before. But now everything feels slow again. Less reach. Less engagement. And you don't know what changed.",
     cta:'You need momentum again.',
+    accent:'#0d6efd',
   },
   {
     n:'03', tag:'Serious creator',
     t:"You're serious… but something is missing",
     d:"You care about your content. You want to grow properly. But without visibility, even good content stays hidden.",
     cta:'You need the right push to move forward.',
+    accent:'#7c3aed',
   },
 ];
 
@@ -58,7 +61,7 @@ const WhoCard = ({n,t,tag,d,cta}) => (
   onMouseLeave={e=>{e.currentTarget.style.transform='none';e.currentTarget.style.borderColor='var(--line)';e.currentTarget.style.boxShadow='none';}}>
     <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20}}>
       <span style={{fontFamily:'var(--mono)', fontSize:11, color:'var(--accent)', fontWeight:600}}>{n}</span>
-      <span style={{padding:'3px 10px', borderRadius:999, background:`rgba(${k.accent==='#166534'?'22,101,52':k.accent==='#0d6efd'?'13,110,253':'124,58,237'},.1)`, border:`1px solid ${k.accent}33`, fontSize:10, fontFamily:'var(--mono)', color:k.accent, textTransform:'uppercase', letterSpacing:'.08em'}}>{tag}</span>
+      <span style={{padding:'3px 10px', borderRadius:999, background:'var(--accent-l)', border:'1px solid rgba(22,101,52,.2)', fontSize:10, fontFamily:'var(--mono)', color: k.accent || 'var(--accent)', textTransform:'uppercase', letterSpacing:'.08em'}}>{tag}</span>
     </div>
     <h3 style={{fontFamily:'var(--sans)', fontWeight:800, fontSize:'clamp(18px,2vw,24px)', letterSpacing:'-.02em', lineHeight:1.15, color:'var(--ink)', marginBottom:12}}>{t}</h3>
     <p style={{fontSize:14, lineHeight:1.6, color:'var(--ink-2)', flex:1}}>{d}</p>
